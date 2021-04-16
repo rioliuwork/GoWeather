@@ -40,6 +40,7 @@ func (spider *CitySpider) GetCityInfo(cityName string) {
 	spider.citys = citys
 }
 
+//查询城市列表
 func search(cityName string) (jsonArray []map[string]interface{}) {
 	reqUrl := "http://toy1.weather.com.cn/search"
 	param := "cityname=" + cityName
