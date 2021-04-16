@@ -3,9 +3,7 @@ module GoSpider
 go 1.15
 
 require (
-	spider v0.0.0
+	github.com/gin-gonic/gin v1.7.1
+	github.com/PuerkitoBio/goquery v1.6.1
 )
 
-replace (
-	spider => ./spider
-)

@@ -51,13 +51,15 @@ func parsePartsWeather(doc *goquery.Document) *[]partWeather {
 		winVal, _ := selection.Find(".win span").Attr("title")
 		win := strings.Join([]string{winVal, selection.Find(".win span").Text()}, " ")
 		tem := fmt.Sprintf("%s%s", selection.Find(".tem span").Text(), selection.Find(".tem em").Text())
+		sunUp := selection.Find(".sunUp span").Text()
+		sunDowm := selection.Find(".sunDown span").Text()
 		partW := partWeather{
 			TimeName: selection.Find("h1").Text(),
 			Wea:      selection.Find(".wea").Text(),
 			Tem:      tem,
 			Win:      win,
-			SunUp:    selection.Find(".sunUp span").Text(),
-			SunDown:  selection.Find(".sunDown span").Text(),
+			SunUp:    strings.Replace(sunUp, "\n", " ", -1),
+			SunDown:  strings.Replace(sunDowm, "\n", " ", -1),
 		}
 		partsWeather = append(partsWeather, partW)
 	})

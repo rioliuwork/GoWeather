@@ -55,6 +55,5 @@ func search(cityName string) (jsonArray []map[string]interface{}) {
 	body := string(bodyByte)
 	bodyJson := body[1 : len(body)-1]
 	json.Unmarshal([]byte(bodyJson), &jsonArray)
-	log.Println(jsonArray)
 	return
 }

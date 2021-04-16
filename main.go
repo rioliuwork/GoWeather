@@ -1,14 +1,17 @@
 package main
 
 import (
-	"log"
-	"spider"
+	"GoSpider/services"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	citySpider := spider.NewCitySpider()
-	citySpider.GetCityInfo("四川")
-	weatherSpider := spider.NewWeatherSpider()
-	weatherSpider.GetWeatherInfo(citySpider.Citys[0].HtmlCode)
-	log.Println(*weatherSpider.PartsWeather)
+	router := gin.Default()
+	router.POST("/city/list", func(context *gin.Context) {
+		services.CityList(context)
+	})
+	router.POST("/weather/difference", func(context *gin.Context) {
+		services.DayAndNight(context)
+	})
+	router.Run(":8080")
 }
