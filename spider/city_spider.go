@@ -19,7 +19,7 @@ type City struct {
 }
 
 type CitySpider struct {
-	citys []City
+	Citys []City
 }
 
 func (spider *CitySpider) GetCityInfo(cityName string) {
@@ -37,7 +37,7 @@ func (spider *CitySpider) GetCityInfo(cityName string) {
 		}
 		citys = append(citys, city)
 	}
-	spider.citys = citys
+	spider.Citys = citys
 }
 
 //查询城市列表

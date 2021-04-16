@@ -6,9 +6,9 @@ import (
 )
 
 func main() {
-	//citySpider := spider.NewCitySpider()
-	//citySpider.GetCityInfo("彭州")
+	citySpider := spider.NewCitySpider()
+	citySpider.GetCityInfo("四川")
 	weatherSpider := spider.NewWeatherSpider()
-	weatherSpider.GetWeatherInfo("101010100")
+	weatherSpider.GetWeatherInfo(citySpider.Citys[0].HtmlCode)
 	log.Println(*weatherSpider.PartsWeather)
 }
