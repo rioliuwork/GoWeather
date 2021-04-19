@@ -8,6 +8,6 @@ import (
 func main() {
 	router := gin.Default()
 	router.POST("/city/list", services.CityList)
-	router.POST("/weather/difference", services.DayAndNight)
+	router.POST("/weather/weatherInfo", services.WeatherInfo)
 	router.Run(":8080")
 }

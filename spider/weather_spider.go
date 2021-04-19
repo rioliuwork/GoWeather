@@ -26,8 +26,15 @@ type partWeather struct {
 	SunDown string
 }
 
+type LifeInfo struct {
+	IndexName string
+	Title     string
+	Context   string
+}
+
 type WeatherSpider struct {
 	PartsWeather *[]partWeather
+	LifeInfos    *[]LifeInfo
 }
 
 func (spider *WeatherSpider) GetWeatherInfo(htmlCode string) {
@@ -40,9 +47,23 @@ func (spider *WeatherSpider) GetWeatherInfo(htmlCode string) {
 	}
 
 	spider.PartsWeather = parsePartsWeather(doc)
+	spider.LifeInfos = parseLifeInfos(doc)
 	//log.Println(partsWeather)
 
 	//fmt.Printf("script:%s",doc.Find("script").Text())
+}
+
+func parseLifeInfos(doc *goquery.Document) *[]LifeInfo {
+	lifeInfos := make([]LifeInfo, 0)
+	doc.Find(".livezs .clearfix li").Each(func(i int, selection *goquery.Selection) {
+		lifeInfo := LifeInfo{
+			Title:     strings.Replace(selection.Find("span").Text(), "\n", "", -1),
+			IndexName: selection.Find("em").Text(),
+			Context:   selection.Find("p").Text(),
+		}
+		lifeInfos = append(lifeInfos, lifeInfo)
+	})
+	return &lifeInfos
 }
 
 func parsePartsWeather(doc *goquery.Document) *[]partWeather {
